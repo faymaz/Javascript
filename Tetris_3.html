@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tetris Oyunu</title>
+  <style>
+    #game-container {
+      width: 300px;
+      height: 600px;
+      border: 1px solid black;
+      position: relative;
+    }
+    
+    .block {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tetris Oyunu</h1>
+  
+  <div id="game-container"></div>
+  <p id="score">Skor: 0</p>
+  
+  <script>
+    var gameContainer = document.getElementById("game-container");
+    var blocks = [];
+    var score = 0;
+    var gameRunning = true;
+    var tetrominos = [
+      [[1, 1, 1, 1]], // I-Tetromino
+      [[1, 1, 1], [0, 1, 0]], // T-Tetromino
+      [[1, 1, 1], [1, 0, 0]], // L-Tetromino
+      [[1, 1, 1], [0, 0, 1]], // J-Tetromino
+      [[1, 1], [1, 1]], // O-Tetromino
+      [[1, 1, 0], [0, 1, 1]], // Z-Tetromino
+      [[0, 1, 1], [1, 1, 0]] // S-Tetromino
+    ];
+    
+    var currentTetromino;
+    var currentTetrominoIndex;
+    var currentTetrominoRotation;
+    var currentTetrominoX;
+    var currentTetrominoY;
+    
+    function createBlock(x, y) {
+      var block = document.createElement("div");
+      block.className = "block";
+      block.style.left = x + "px";
+      block.style.top = y + "px";
+      return block;
+    }
+    
+    function drawTetromino() {
+      for (var i = 0; i < currentTetromino.length; i++) {
+        for (var j = 0; j < currentTetromino[i].length; j++) {
+          if (currentTetromino[i][j] === 1) {
+            var x = (currentTetrominoX + j) * 30;
+            var y = (currentTetrominoY + i) * 30;
+            var block = createBlock(x, y);
+            gameContainer.appendChild(block);
+            blocks.push(block);
+          }
+        }
+      }
+    }
+    
+    function clearTetromino() {
+      for (var i = 0; i < blocks.length; i++) {
+        gameContainer.removeChild(blocks[i]);
+      }
+      blocks = [];
+    }
+    
+    function canMoveDown() {
+      for (var i = 0; i < currentTetromino.length; i++) {
+        for (var j = 0; j < currentTetromino[i].length; j++) {
+          if (currentTetromino[i][j] === 1) {
+            var x = currentTetrominoX + j;
+            var y = currentTetrominoY + i + 1;
+            if (y >= 20 || (blocks[y] && blocks[y][x])) {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+    
+    function moveDown() {
+      if (canMoveDown()) {
+        clearTetromino();
+        currentTetrominoY++;
+        drawTetromino();
+      } else {
+        freezeTetromino();
+        clearLines();
+        spawnTetromino();
+      }
+    }
+    
+    function canMoveLeft() {
+      for (var i = 0; i < currentTetromino.length; i++) {
+        for (var j = 0; j < currentTetromino[i].length; j++) {
+          if (currentTetromino[i][j] === 1) {
+            var x = currentTetrominoX + j - 1;
+            var y = currentTetrominoY + i;
+            if (x < 0 || (blocks[y] && blocks[y][x])) {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+    
+    function moveLeft() {
+      if (canMoveLeft()) {
+        clearTetromino();
+        currentTetrominoX--;
+        drawTetromino();
+      }
+    }
+    
+    function canMoveRight() {
+      for (var i = 0; i < currentTetromino.length; i++) {
+        for (var j = 0; j < currentTetromino[i].length; j++) {
+          if (currentTetromino[i][j] === 1) {
+            var x = currentTetrominoX + j + 1;
+            var y = currentTetrominoY + i;
+            if (x >= 10 || (blocks[y] && blocks[y][x])) {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+    
+    function moveRight() {
+      if (canMoveRight()) {
+        clearTetromino();
+        currentTetrominoX++;
+        drawTetromino();
+      }
+    }
+    
+    function canRotate() {
+      var newRotation = (currentTetrominoRotation + 1) % 4;
+      var newTetromino = tetrominos[currentTetrominoIndex][newRotation];
+      
+      for (var i = 0; i < newTetromino.length; i++) {
+        for (var j = 0; j < newTetromino[i].length; j++) {
+          if (newTetromino[i][j] === 1) {
+            var x = currentTetrominoX + j;
+            var y = currentTetrominoY + i;
+            if (
+              x < 0 ||
+              x >= 10 ||
+              y >= 20 ||
+              (blocks[y] && blocks[y][x])
+            ) {
+              return false;
+            }
+          }
+        }
+      }
+      return true;
+    }
+    
+    function rotate() {
+      if (canRotate()) {
+        clearTetromino();
+        currentTetrominoRotation = (currentTetrominoRotation + 1) % 4;
+        currentTetromino = tetrominos[currentTetrominoIndex][currentTetrominoRotation];
+        drawTetromino();
+      }
+    }
+    
+    function freezeTetromino() {
+      for (var i = 0; i < currentTetromino.length; i++) {
+        for (var j = 0; j < currentTetromino[i].length; j++) {
+          if (currentTetromino[i][j] === 1) {
+            var x = currentTetrominoX + j;
+            var y = currentTetrominoY + i;
+            var block = createBlock(x * 30, y * 30);
+            gameContainer.appendChild(block);
+            blocks.push(block);
+          }
+        }
+      }
+    }
+    
+    function clearLines() {
+      var linesCleared = 0;
+      for (var i = 0; i < 20; i++) {
+        var lineFilled = true;
+        for (var j = 0; j < 10; j++) {
+          if (!blocks[i] || !blocks[i][j]) {
+            lineFilled = false;
+            break;
+          }
+        }
+        if (lineFilled) {
+          clearLine(i);
+          linesCleared++;
+        }
+      }
+      if (linesCleared > 0) {
+        updateScore(linesCleared);
+      }
+    }
+    
+    function clearLine(lineIndex) {
+      for (var i = lineIndex; i > 0; i--) {
+        blocks[i] = blocks[i - 1];
+        for (var j = 0; j < 10; j++) {
+          if (blocks[i] && blocks[i][j]) {
+            blocks[i][j].style.top = (i * 30) + "px";
+          }
+        }
+      }
+      blocks[0] = [];
+    }
+    
+    function updateScore(linesCleared) {
+      score += linesCleared * 10;
+      document.getElementById("score").innerHTML = "Skor: " + score;
+    }
+    
+    function spawnTetromino() {
+      currentTetrominoIndex = Math.floor(Math.random() * tetrominos.length);
+      currentTetrominoRotation = 0;
+      currentTetromino = tetrominos[currentTetrominoIndex][currentTetrominoRotation];
+      currentTetrominoX = 4;
+      currentTetrominoY = 0;
+      
+      if (!canMoveDown()) {
+        gameRunning = false;
+        alert("Oyun bitti! Skorunuz: " + score);
+      }
+      
+      drawTetromino();
+    }
+    
+    document.addEventListener("keydown", function(event) {
+      if (gameRunning) {
+        if (event.code === "ArrowDown") {
+          moveDown();
+        } else if (event.code === "ArrowLeft") {
+          moveLeft();
+        } else if (event.code === "ArrowRight") {
+          moveRight();
+        } else if (event.code === "ArrowUp") {
+          rotate();
+        }
+      }
+    });
+    
+    spawnTetromino();
+    
+    setInterval(function() {
+      if (gameRunning) {
+        moveDown();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
