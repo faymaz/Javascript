@@ -5,7 +5,7 @@
 console.log('Hello World');
 alert('Alert');
 ```
-in Webbrowser you can add JS in head or Body section.But the best practice is to put the Jscript element at the end of the body ( before the </body> tag) section after all the existing elements so here after h1 I'm gonna type script. <script></script> or as a file <script src="example.js"></script>
+in Webbrowser you can add JS in head or Body section.But the best practice is to put the Jscript element at the end of the body ( before the < /body> tag) section after all the existing elements so here after h1 I'm gonna type script. <script></script> or as a file <script src="example.js"></script>
 
 ## Comment
 
