@@ -32,7 +32,7 @@ now
 
 let name = 'Mosh';
 
-// variable names can not be a reserved keyword like (let, var, if, else, true, false)
+// variable names can not be a reserved keyword like (let, var, if, else, true, false, typeof, return)
 if we use 
 let if = 'Mosh'; // not valid identifier
 
@@ -62,16 +62,86 @@ let is Approved = true; // Boolean Literal false
 let firstName; // undefined but we could also let firstName = undefined;
 let lastName = null; // when we want to clear the value of a variable we use null
 
+JS is a Dinamic Lanuage we can change 
+let name = 'Mosh';
+typeof name;
+"string"
+name = 1;
+typeof name
+"number"
+
+
+contrl+L //we can clear consol
+
+undefined is also type
+
 #### Reference Types
+Object
+Array
+Function
 
 
 
+typeof
+isPrototypeof
 
 
+####Object
+let name = 'Mosh';
+let age = 30;
+
+let person = {
+ name: 'Mosh',
+ age: 30
+}
+
+// Dot Notation
+person.name = 'John';
+
+// Bracket Notation
+person['name'] = 'Mary';
+
+let selection = 'name';
+person[selection] = 'Mary';
+
+console.log(person.name);
+
+#### Array
+let selectedColors = []; // Array literal indicates empty array
+
+let selectedColors = ['red', 'blue'];
+console.log(selectedColors[0]);
+selectedColors[2] = 'green';
+selectedColors[3] = 1;
+console.log(selectedColors.length);
 
 
+#### Functions declaration
+function greet(){
+}
+
+greet();
+
+function greet(name){
+ console.log('Hello ' + name);
+}
+greet('John'); // parameter and argument
+greet();
 
 
+function greet(name, lastName){
+ console.log('Hello ' + name + ' ' + lastName);
+}
+greet('John', 'Smith); // parameter and argument  // default value of variables in JS is undefined
 
+#### Types of Functions
+
+// Calculating a value
+function square(number) {
+ return number * number;
+}
+
+let number = sqaure(2);
+console.log(number); // console.log(square(2));
 
 
