@@ -4,7 +4,12 @@
 ```
 console.log('Hello World');
 alert('Alert');
+alert ("Hello World!");
+prompt ("How old are you?");
 ```
+
+type="text/javascript" old version
+
 in Webbrowser you can add JS in head or Body section.But the best practice is to put the Jscript element at the end of the body ( before the < /body> tag) section after all the existing elements. <script></script> or as a file <script src="example.js"></script>
 
 ## Comment
@@ -13,6 +18,10 @@ in Webbrowser you can add JS in head or Body section.But the best practice is to
 /*
  This is my Comment block!
 */
+
+html <!-- -->
+
+
 
 ## Command Line JS code exacution
 
@@ -152,12 +161,42 @@ example:
 <body>
 <h2>HTML-Change content</h2>
 <p id ="section">Original text</p>
-<button type = "button" onclick =
-"document.getElementById('section').innerHTML =
-'Changed content'">Change Value</button>
+<button type = "button" onclick = "document.getElementById('section').innerHTML = 'Changed content'">Change Value</button>
+</body>
+</html>
+
+
+// some simlpe examples
+
+<button type = "button" onclick ="document.getElementById('section').innerHTML = 'Changed content'">Change Value</button>
+<button type = "button" onclick ="document.getElementById('section').style.color ='red'">Change color</button>
+
+
+
+
+<html>
+<body>
+<h2>Replace graphics</h2>
+<button onclick="document.getElementById('myPicture').src='pic1.gif'">Pic 1</button>
+<img id="myPicture" src="pic1.gif"><button onclick="document.getElementById('myPicture').src='pic2.gif'">Pic 2</button>
+</body>
+</html>
+
+
+
+<html>
+<body>
+<h2>Access operating system features</h2>
+<p id ="section">The date will appear here</p>
+<button type = "button" onclick = "document.getElementById('section').innerHTML = Date()">Show date</button>
 </body>
 </html>
 
 ```
 
-
+```
+<script>
+"use strict";
+alert ("Hallo Welt!");
+</script>
+```
