@@ -145,3 +145,19 @@ let number = sqaure(2);
 console.log(number); // console.log(square(2));
 
 
+
+example:
+```
+<html>
+<body>
+<h2>HTML-Change content</h2>
+<p id ="section">Original text</p>
+<button type = "button" onclick =
+"document.getElementById('section').innerHTML =
+'Changed content'">Change Value</button>
+</body>
+</html>
+
+```
+
+
