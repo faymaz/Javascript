@@ -9,6 +9,10 @@ prompt ("How old are you?");
 ```
 
 type="text/javascript" old version
+<script src = "begruessung.js">
+...
+...
+</script>
 
 in Webbrowser you can add JS in head or Body section.But the best practice is to put the Jscript element at the end of the body ( before the < /body> tag) section after all the existing elements. <script></script> or as a file <script src="example.js"></script>
 
