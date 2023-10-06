@@ -6,6 +6,8 @@ console.log('Hello World');
 alert('Alert');
 alert ("Hello World!");
 prompt ("How old are you?");
+document.write ("ganzeZahl: " + typeof ganzeZahl + "<br>");
+document.write
 ```
 
 type="text/javascript" old version
