@@ -206,3 +206,22 @@ example:
 alert ("Hallo Welt!");
 </script>
 ```
+
+
+
+
+### Math
+```
++Addition
+-Subtraction
+/Division
+*Multiplication
+** Exponentiation
+% Modulo
++= Increase by the specified value
+-= Decrease by the specified value
+*= Multiply by the specified value
+/= Divide by the specified value
+++ Increase by 1
+-- Decrease by 1
+```
