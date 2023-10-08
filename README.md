@@ -6,12 +6,12 @@ console.log('Hello World');
 alert('Alert');
 alert ("Hello World!");
 prompt ("How old are you?");
-document.write ("ganzeZahl: " + typeof ganzeZahl + "<br>");
+document.write ("integer: " + typeof integer + "<br>");
 document.write
 ```
 
 type="text/javascript" old version
-<script src = "begruessung.js">
+<script src = "greeting.js">
 ...
 ...
 </script>
