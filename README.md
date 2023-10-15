@@ -1,6 +1,8 @@
 # Javascript
 
- 
+&& and
+|| or
+
 ```
 console.log('Hello World');
 alert('Alert');
