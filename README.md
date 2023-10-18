@@ -124,6 +124,10 @@ person[selection] = 'Mary';
 console.log(person.name);
 
 #### Array
+let myArray = new Array();
+or
+let myArray = [];
+
 let selectedColors = []; // Array literal indicates empty array
 
 let selectedColors = ['red', 'blue'];
